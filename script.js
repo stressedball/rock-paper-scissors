@@ -1,101 +1,75 @@
-alert("Let's play rock paper scissors!");
+function getComputerChoice() {
+    let choices = ["rock", "paper", "scissors"];
+    randomizer = Math.floor(Math.random() * 3);
+    let computerChoice = choices[randomizer];
+    return computerChoice;
+}
 
-let userInput = prompt("Play");
+function playRound(playerSelection, computerSelection) {
 
-const possibleChoices = ["rock", "paper", "scissors"];
+    playerSelection = prompt("Enter rock paper scissors");
+    playerSelection = playerSelection.toLowerCase();    
 
-let userScore = 0, cpuScore = 0;
-
-
-/* ROUND RESULT */
-function roundResult() {
-
-    let userInputCorrected = userInput.toLowerCase();
-    console.log(userInputCorrected);
-
-    /* make sure user input is correct by game rules */
-    if ((userInputCorrected !== "rock") && (userInputCorrected !=="paper") && (userInputCorrected !== "scissors")) {
-
-        alert("Please use rock/paper/scissors only.");
-        userInput = prompt("Play again");
-
-    } else if (userInputCorrected === "" ) {
+    if (playerSelection === "" ) {
 
         alert("Please input something");
-        userInput = prompt("Play again");
+        return;
+
+    } else if ((playerSelection !== "rock") && (playerSelection !=="paper") && (playerSelection !== "scissors")) {
+
+        alert("Please use rock/paper/scissors only.");
+        return;
 
     }
 
-    let cpuChoice = getCpuChoice();
-    console.log(cpuChoice);
+    computerSelection = getComputerChoice();
 
-    /* just alerting, don't think anything is returned */
-    if (userInputCorrected === "rock") {
+    if (playerSelection === "rock") {
 
-        if (cpuChoice === "rock") {
+        if (computerSelection === "rock") {
 
             alert("it's a TIE");
 
-        } else if (cpuChoice === "paper") {
+        } else if (computerSelection === "paper") {
 
             alert("you lose");
-            cpuScore++;
 
         } else {
 
             alert("you win");
-            userScore++;
 
         }
 
-    } else if (userInputCorrected === "paper") {
+    } else if (playerSelection === "paper") {
 
-        if (cpuChoice === "paper") {
+        if (computerSelection === "paper") {
             alert("it's a TIE");
 
-        } else if (cpuChoice === "rock") {
+        } else if (computerSelection === "rock") {
 
             alert("you won");
-            userScore++;
 
         } else {
 
             alert("you lost");
-            cpuScore++;
 
         } 
         } else {
 
-            if (cpuChoice === "scissors") {
+            if (computerSelection === "scissors") {
                 alert("it's a tie");
 
-            } else if (cpuChoice === "paper") {
+            } else if (computerSelection === "paper") {
 
                 alert("you won");
-                userScore++;
 
             } else {
 
                 alert("you lost");
-                cpuScore++;
 
             }
         } 
 
-    userInput = prompt("Another game. First to 5!");
 }
 
-
-/* generate random choice */
-function getCpuChoice() {
-    const computerGuess = (Math.floor(Math.random() * 3));
-    const compGuessToString = possibleChoices[computerGuess];
-    return compGuessToString;
-}
-
-/* make a game of 5 & track score */
-while (userScore < 6 && cpuScore < 6) {
-
-    roundResult();
-
-}
+playRound();
