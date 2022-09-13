@@ -1,3 +1,65 @@
+const body = document.querySelector('body');
+body.style.display = 'flex';
+body.style.flexDirection = 'column';
+body.style.margin = '0px';
+body.style.padding = '0 px';
+
+
+//THAT UGLY BIG HEADER
+const header = document.createElement('div');
+header.textContent = 'ROCK PAPER SCISSORS!'
+header.style.fontSize = '90px';
+header.style.height = '200px';
+body.appendChild(header);
+
+//main container for now
+const container = document.createElement('div');
+container.className = 'buttonsContainer';
+//function to style the container, ie its properties
+function containerStyle () {
+    container.style.marginLeft = '200px';
+    container.style.marginRight = '200px';
+    container.style.display = 'flex';
+    container.style.justifyContent = 'space-between';
+    container.style.gap = '100px';
+    //container.style.margin = 0;
+    //container.style.padding = 0;
+    //container.style = 'padding-top : 150px';
+    container.style.minHeight = '200px';    
+    return container;
+}
+body.appendChild(containerStyle(container));
+
+let paperButton = document.createElement('div');
+let rockButton = document.createElement('div');
+let scissorsButton = document.createElement('div');
+
+container.appendChild(paperButton);
+container.appendChild(rockButton);
+container.appendChild(scissorsButton);
+
+//function to style each player button
+//YOU HAVE TO PUT IT UNDER THE CODE WHERE YOU CREATE THE ELEMENT!!!
+function playerButtonStyle() {
+    //console.log(container);
+    let playerButton = container.querySelectorAll('div');
+    //console.log(playerButton);
+    for (let i = 0; i < playerButton.length; i++) {
+        playerButton[i].textContent = 'wut';
+        playerButton[i].style.border = '5px solid black';
+        playerButton[i].style.flex = '1';
+        playerButton[i].style.maxWidth = '200px';
+        playerButton[i].style.justifyContent = 'center';
+        playerButton[i].className = 'button';
+        //console.log(playerButton[i]);
+    }
+}
+playerButtonStyle();
+
+
+
+
+/*
 let playerSelection, computerSelection;
 let playerScore = 0, computerScore = 0;
 
@@ -112,8 +174,10 @@ function game() {
     }
     
 }
+*/
 
-
+//GAME OF 5 UNDER
+/*
 
 for (let i = 1; i < 6; i++) {
 
@@ -123,6 +187,7 @@ for (let i = 1; i < 6; i++) {
     
     console.log(`Player score = ${playerScore}. Computer score = ${computerScore}`);
 
+    
     i = i++;
 
     if (i == 4) {
@@ -144,3 +209,4 @@ if (playerScore > computerScore) {
 } else {
     alert("ITS A TIE! WHO THOUGHT?");
 }
+*/
