@@ -61,3 +61,17 @@ body {
 .middlePart {
     font-size: '20px';
 }
+
+.again {
+    background-color: #b2b2b2;
+
+}
+
+.againContainer {
+    background-color: #b2b2b2;
+    min-height: '40px';
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
