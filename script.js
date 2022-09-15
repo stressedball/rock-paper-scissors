@@ -8,70 +8,71 @@ function getComputerChoice() {
     return computerChoice;
 }
     
-playerSelection = document.querySelectorAll('.button');
+paperButton = document.querySelector('.button.paper');
+rockButton = document.querySelector('.button.rock');
+scissorsButton = document.querySelector('.button.scissors');
 
-for (let i = 0; i < playerSelection.length; i++) {
-    playerSelection[i].addEventListener('click', bottomMessages);
+playerSelection = document.addEventListener('click', playRound);
 
-    function bottomMessages(e) {
-        let roundResult = "";
-        roundResult = document.querySelector('.leftPart');
-        roundResult.textContent = `Round result : ${playRound(e)}`;
-
-        let generalScore = 0;
-        generalScore = document.querySelector('.rightPart');
-        generalScore.textContent = `CPU score : ${computerScore} - ${playerScore} : Your Score`;
+function playRound(e) {
+    let roundResult = "";
+    roundResult = document.querySelector('.leftPart');
+    
         
-        if (computerScore === 5 || playerScore === 5) {
-            playerSelection[i].removeEventListener('click', bottomMessages);
-            funMessage();
-        }
-    }
+    let generalScore = 0;
+    generalScore = document.querySelector('.rightPart');
 
-    function playRound(e) {
+    let gameResult = "";
+    gameResult = document.querySelector('.middlePart');
+    
+    
+    if (e.target === paperButton) {
         computerSelection = getComputerChoice();
-        if (e.target.classList.contains('paper')) {
-            if (computerSelection === 'paper') {
-                return('ITS A TIE');
-            } else if (computerSelection === 'rock') {
-                playerScore++;
-                return('PAPER BEATS ROCK, YOU WIN!');
-            } else {
-                computerScore++;
-                return('SCISSORS BEATS PAPER, YOU LOSE!');
-            }         
-        } else if (e.target.classList.contains('rock')) {
-            if (computerSelection === 'rock') {
-                return('ITS A TIE');
-            } else if (computerSelection === 'paper') {
-                computerScore++;
-                return('PAPER BEATS ROCK, YOU LOSE!');
-            } else {
-                playerScore++;
-                return('ROCK BEATS SCISSORS, YOU WIN');
-            }
-        } else if (e.target.classList.contains('scissors')) {  
-            if (computerSelection === 'scissors') {
-                return('ITS A TIE');
-            } else if (computerSelection === 'rock') {
-                computerScore++;
-                return('ROCK BEATS SCISSORS, YOU LOSE!');
-            } else {
-                playerScore++;
-                return('SCISSORS BEATS PAPER, YOU WIN!');
-            }
+        if (computerSelection === 'paper') {
+            roundResult.textContent = 'Round result : IT\'S A TIE!';
+        } else if (computerSelection === 'rock') {
+            playerScore++;
+            roundResult.textContent = 'Round result : PAPER BEATS ROCK, YOU WIN!';
+            generalScore.textContent = `CPU score : ${computerScore} - ${playerScore} : Your Score`;
+        } else {
+            computerScore++;
+            roundResult.textContent = 'SCISSORS BEATS PAPER, YOU LOSE!';
+            generalScore.textContent = `CPU score : ${computerScore} - ${playerScore} : Your Score`;
         }
-
-
-    }  
-}
-
-function funMessage () {
-    const funMessageVar = document.querySelector('.middlePart');
-    if (computerScore === 5) {
-        funMessageVar.textContent = 'CPU WON!';
-    } else if (playerScore === 5) {
-        funMessageVar.textContent = 'YOU WON!';
+    } else if (e.target === rockButton) {
+        if (computerSelection === 'rock') {
+            roundResult.textContent = 'Round result : IT\'S A TIE!';
+        } else if (computerSelection === 'paper') {
+            computerScore++;
+            roundResult.textContent = 'PAPER BEATS ROCK, YOU LOSE!';
+            generalScore.textContent = `CPU score : ${computerScore} - ${playerScore} : Your Score`;
+        } else {
+            playerScore++;
+            roundResult.textContent = 'ROCK BEATS SCISSORS, YOU WIN';
+            generalScore.textContent = `CPU score : ${computerScore} - ${playerScore} : Your Score`;
+        }
+    } else if (e.target === scissorsButton) {
+        if (computerSelection === 'scissors') {
+            return('ITS A TIE');
+        } else if (computerSelection === 'rock') {
+            computerScore++;
+            roundResult.textContent = 'ROCK BEATS SCISSORS, YOU LOSE!';
+            generalScore.textContent = `CPU score : ${computerScore} - ${playerScore} : Your Score`;
+        } else {
+            playerScore++;
+            roundResult.textContent ='SCISSORS BEATS PAPER, YOU WIN!';
+            generalScore.textContent = `CPU score : ${computerScore} - ${playerScore} : Your Score`;
+        }
     }
-    return funMessageVar;
+
+    if (computerScore === 5)  {
+        generalScore.textContent = `CPU score : ${computerScore} - ${playerScore} : Your Score`;
+        gameResult.textContent = "COMPUTER WON"
+        playerSelection = document.removeEventListener('click', playRound);
+    } else if (playerScore === 5) {
+        generalScore.textContent = `CPU score : ${computerScore} - ${playerScore} : Your Score`;
+        gameResult.textContent = "YOU WON"
+        playerSelection = document.removeEventListener('click', playRound);
+    }
 }
+
