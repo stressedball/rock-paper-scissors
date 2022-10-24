@@ -15,11 +15,10 @@ scissorsButton = document.querySelector('.button.scissors');
 playerSelection = document.addEventListener('click', playRound);
 
 let roundResult = "";
-roundResult = document.querySelector('.leftPart');
+roundResult = document.querySelector('.roundResult');
 let generalScore = 0;
-generalScore = document.querySelector('.rightPart');
-let gameResult = "";
-gameResult = document.querySelector('.middlePart');
+generalScore = document.querySelector('.score');
+let gameResult; //make this a splashscreen por favor
 
 function playRound(e) {    
     computerSelection = getComputerChoice();
@@ -66,12 +65,12 @@ function playRound(e) {
 
     if (computerScore === 1)  {
         generalScore.textContent = `CPU score : ${computerScore} - ${playerScore} : Your Score`;
-        gameResult.textContent = "COMPUTER WON"
+        //gameResult.textContent = "COMPUTER WON"
         playerSelection = document.removeEventListener('click', playRound);
         playAgain();
     } else if (playerScore === 1) {
         generalScore.textContent = `CPU score : ${computerScore} - ${playerScore} : Your Score`;
-        gameResult.textContent = "YOU WON"
+        //gameResult.textContent = "YOU WON"
         playerSelection = document.removeEventListener('click', playRound);
         playAgain();
     }
@@ -80,8 +79,6 @@ function playRound(e) {
 let playAgainButton = document.querySelector('.again');;
 function playAgain() {
     let againContainer = document.querySelector('.againContainer');
-
-    
     playAgainButton.textContent = "Wanna go again?";
     playAgainButton.style.fontSize = '20px';
     //playAgainButton.style.alignSelf = 'center';
@@ -100,7 +97,7 @@ function newRound(e) {
         computerScore = 0, playerScore = 0;
         roundResult.textContent = "Let's go again!";
         generalScore.textContent = "Waiting for round to start to display score.";
-        gameResult.textContent = "";
+        //gameResult.textContent = "";
         playerSelection = document.addEventListener('click', playRound);
         playAgainButton.parentElement.removeChild(playAgainButton);
     }
